@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import {Bar} from 'react-chartjs-2'
+import {Bar, Line, Pie, } from 'react-chartjs-2'
 import "chart.js/auto";
 // const labels = Utils.months({count: 7});
 const data = {
@@ -35,6 +35,11 @@ export default function Home() {
   return (
     <div>
       <Bar data={data} />
+      <Pie data={data} />
+      <Line data={data} />
+
+
+
       <h1>Hello from Home</h1>
     </div>
   );
