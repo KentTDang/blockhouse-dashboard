@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from blockhouse.api.charts import BarChartApiView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/bar-chart-data', BarChartApiView.as_view()),
 ]

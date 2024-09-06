@@ -1,6 +1,8 @@
 "use client"
+import {useEffect, useState} from 'react'
+
 import Image from "next/image"
-import {Bar, Line, Pie, } from 'react-chartjs-2'
+import {Bar, Line, Pie, ChartProps} from 'react-chartjs-2'
 import "chart.js/auto";
 // const labels = Utils.months({count: 7});
 const data = {
@@ -32,14 +34,22 @@ const data = {
 
 export default function Home() {
 
+  const [barChartData, setBarChartData] = useState<ChartProps["data"]>({datasets:[]});
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('/api/bar-chart-data');
+      const data = await response.json();
+      setBarChartData(data);
+    })()
+  }, []);
+
+console.log(barChartData);
+
   return (
-    <div>
-      <Bar data={data} />
-      <Pie data={data} />
-      <Line data={data} />
-
-
-
+    <div className='w-2/4'>
+      <Bar data={barChartData} />
+      <Pie data={barChartData} />
+      <Line data={barChartData} />
       <h1>Hello from Home</h1>
     </div>
   );
